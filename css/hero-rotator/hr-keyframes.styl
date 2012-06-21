@@ -1,0 +1,63 @@
+@keyframes hr-slide-down-in
+  0%
+    transform translate3d(0, $hero-animate-distance * -1, 0)
+    opacity: 0
+
+  100%
+    transform translate3d(0, 0, 0)
+
+@keyframes hr-slide-up-in
+  0%
+    transform translate3d(0, $hero-animate-distance, 0)
+    opacity: 0
+
+  100%
+    transform translate3d(0, 0, 0)
+
+@keyframes hr-slide-down-out
+  0%
+    transform translate3d(0, 0, 0)
+
+  100%
+    transform translate3d(0, $hero-animate-distance, 0)
+    opacity: 0
+
+@keyframes hr-slide-up-out
+  0%
+    transform translate3d(0, 0, 0)
+
+  100%
+    transform translate3d(0, $hero-animate-distance * -1, 0)
+    opacity: 0
+
+@keyframes hr-slide-right-in
+  0%
+    transform translate3d($hero-animate-distance * -1, 0, 0)
+    opacity: 0
+
+  100%
+    transform translate3d(0, 0, 0)
+
+@keyframes hr-slide-right-out
+  0%
+    transform translate3d(0, 0, 0)
+
+  100%
+    transform translate3d($hero-animate-distance, 0, 0)
+    opacity: 0
+
+@keyframes hr-slide-left-in
+  0%
+    transform translate3d($hero-animate-distance, 0, 0)
+    opacity: 0
+
+  100%
+    transform translate3d(0, 0, 0)
+
+@keyframes hr-slide-left-out
+  0%
+    transform translate3d(0, 0, 0)
+
+  100%
+    transform translate3d($hero-animate-distance * -1, 0, 0)
+    opacity: 0

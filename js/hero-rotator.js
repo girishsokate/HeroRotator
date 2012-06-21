@@ -84,7 +84,7 @@
           }
 
           // Animate the previous slide's contents out
-          $prevSlide.addClass('hr-animate-out').removeClass('hr-animate-in');
+          $prevSlide.addClass('is-hr-animating-out').removeClass('is-hr-animating-in');
 
           // Update the corresponding pagination item
           $paginationItems.eq(slideIndex).addClass('hr-active');
@@ -107,7 +107,7 @@
         }
 
         // Animate the slide's contents in
-        $slide.addClass('hr-animate-in').removeClass('hr-animate-out');
+        $slide.addClass('is-hr-animating-in').removeClass('is-hr-animating-out');
       });
 
       $heroRotator.on('goToNextSlide', function () {

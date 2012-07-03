@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Hero Rotator</title>
+    <link rel="stylesheet" href="css/hero-rotator.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/vendor/modernizr-2.5.3.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <hgroup>
+        <h1>Hero Rotator</h1>
+      </hgroup>
+    </header>
+    <div data-hr-transition-duration="2000" data-hr-reverse-delays="true" data-hr-continuous="true" class="hr">
+      <section>
+        <h1>Arrows</h1>
+        <div class="hr-arrows">
+          <button data-hr-direction="previous" class="hr-arrows-item arrow-left">Previous</button>
+          <button data-hr-direction="next" class="hr-arrows-item arrow-right">Next</button>
+        </div>
+      </section>
+      <section>
+        <h1>Pagination</h1>
+        <ul class="hr-pagination">
+          <li class="hr-pagination-item">
+            <button title="Go to slide 1">Go to slide 1</button>
+          </li>
+          <li class="hr-pagination-item">
+            <button title="Go to slide 2">Go to slide 2</button>
+          </li>
+          <li class="hr-pagination-item">
+            <button title="Go to slide 3">Go to slide 3</button>
+          </li>
+        </ul>
+      </section>
+      <!-- Tab index allows us to listen to keyboard shortcuts on this element-->
+      <div tabindex="1" class="hr-slides">
+        <section id="example-1" class="hr-slides-item">
+          <!-- Your content goes in here-->
+          <div class="island"><img src="images/imac.png" data-hr-x="75px" data-hr-y="0" data-hr-duration="1000" data-hr-delay="100" class="slide-image-1 hr-transition">
+            <h1 data-hr-x="75px" data-hr-y="0" data-hr-duration="1000" data-hr-delay="500" class="slide-title hr-transition">Lorem Ipsum Dolor Sit Amet</h1>
+            <p data-hr-x="75px" data-hr-y="0" data-hr-duration="1000" data-hr-delay="700" class="slide-content-1 hr-transition">Nulla facilisi. Duis aliquet egestas purus in blandit. Curabitur vulputate, ligula lacinia scelerisque tempor, lacus lacus ornare ante, ac egestas est urna sit amet arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed molestie augue sit amet leo consequat posuere.</p>
+          </div>
+        </section>
+        <section id="example-2" class="hr-slides-item">
+          <div class="island"><img src="images/imac.png" data-hr-x="75px" data-hr-y="0" data-hr-duration="3000" data-hr-delay="200" class="slide-image-1 hr-transition">
+            <h1 data-hr-x="-75px" data-hr-y="0" data-hr-duration="1000" data-hr-delay="600" class="slide-title hr-transition">Etiam At Risus Et Justo</h1>
+            <p data-hr-x="0" data-hr-y="75px" data-hr-duration="3000" data-hr-delay="400" class="slide-content-1 hr-transition">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam porttitor mauris.</p>
+          </div>
+        </section>
+        <section id="example-3" class="hr-slides-item">
+          <div class="island">
+            <h1 data-hr-x="0" data-hr-y="200px" data-hr-duration="1000" class="slide-title hr-transition">Thanks for checking out!</h1>
+            <p data-hr-x="75px" data-hr-y="0" data-hr-duration="3000" class="slide-content-1 hr-transition">Another thing by <a href="http://oliverash.me/">Olly Ash</a>.</p>
+          </div>
+        </section>
+      </div>
+    </div><a href="https://github.com/OliverJAsh/HeroRotator"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+    <script src="js/vendor/jquery-1.7.2.min.js"></script>
+    <script src="js/hero-rotator.js"></script>
+  </body>
+</html>

@@ -2,9 +2,6 @@ body {
   font-family: "Georgia", serif;
   font-size: 16px;
   line-height: 1.5;
-  width: 1024px;
-  margin-right: auto;
-  margin-left: auto;
 }
 h1,
 h2,
@@ -22,12 +19,19 @@ a {
 a:hover {
   text-decoration: underline;
 }
-.hr-slides,
-.hr-slides-item {
-  height: 450px;
+.container {
+  width: 1024px;
+  margin-right: auto;
+  margin-left: auto;
 }
 .island {
   padding: 3em;
+}
+#example-1,
+#example-2,
+#example-3 {
+  width: 100%;
+  background-position: center top;
 }
 #example-1 {
   background-image: url("../images/scene-bg-1.jpg");

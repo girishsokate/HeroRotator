@@ -1,10 +1,6 @@
-(function ($) {
-
-  // ----- Helpers ----- //
-  // jQuery CSS method returns time in seconds. This method is used to convert.
-  function convertToMilliseconds(int) {
-    return int + 'ms';
-  }
+// Hero Rotator
+// Author: Oliver Joseph Ash
+;(function ($) {
 
   // ----- CSS Hooks ----- //
   // This will add hooks for the transition and transition-delay CSS properties.
@@ -67,81 +63,110 @@
     }
   };
 
-  $(document).ready(function () {
+  // ----- Helpers ----- //
+  // jQuery CSS method returns time in seconds. This method is used to convert.
+  function convertToMilliseconds(int) {
+    return int + 'ms';
+  }
 
-    var $heroRotators = $('[data-hr]');
+  function reverseDelays($el) {
+    var $this = $(this)
+      , $delayedElements = $el.find('[data-hr-transform][data-hr-delay]')
+      , delays = []
+      , minPlusMax;
 
-    function reverseDelays($el) {
+    $el.toggleClass('hr-reversed-delays');
+
+    // Find each delayed elements and reverse the number of its delay class
+    $delayedElements.each(function () {
       var $this = $(this)
-        , $delayedElements = $el.find('.hr-transition[data-hr-delay]')
-        , delays = []
-        , minPlusMax;
+        , options = $this.data('hr-options');
 
-      $el.toggleClass('hr-reversed-delays');
+      delays.push(options.delay);
+    });
 
-      // Find each delayed elements and reverse the number of its delay class
-      $delayedElements.each(function () {
-        delays.push($(this).data('hr-delay'));
-      });
+    minPlusMax = Math.min.apply(null, delays) + Math.max.apply(null, delays);
 
-      minPlusMax = Math.min.apply(null, delays) + Math.max.apply(null, delays);
+    $delayedElements.each(function () {
+      var $this = $(this);
 
-      $delayedElements.each(function () {
-        var $this = $(this);
+      $this.css({ transitionDelay: convertToMilliseconds(minPlusMax - (parseFloat($this.css('transitionDelay'), 10) * 1000)) });
+    });
+  }
 
-        $this.css({ transitionDelay: convertToMilliseconds(minPlusMax - (parseFloat($this.css('transitionDelay'), 10) * 1000)) });
-      });
-    }
+  function resetDelays($el) {
+    $el.find('[data-hr-transform][data-hr-delay]').each(function () {
+      var $this = $(this)
+        , options = $this.data('hr-options');
 
-    function resetDelays($el) {
-      $el.find('.hr-transition[data-hr-delay]').each(function () {
-        var $this = $(this);
+      $this.css({ transitionDelay: convertToMilliseconds(options.delay) });
+    });
+  }
 
-        $this.css({ transitionDelay: convertToMilliseconds($this.data('hr-delay')) });
-      });
-    }
+  $.fn.heroRotator = function (options) {
 
-    $heroRotators.each(function () {
+    var defaultOptions =
+      { height: '450px'
+      , transitionDuration: 2000
+      , reverseDelays: true
+      , continous: true
+      };
+
+    // Merge defaults and options, without modifying defaults
+    options = $.extend({}, defaultOptions, options);
+
+    return this.each(function () {
 
       var $heroRotator = $(this)
-        , $slides = $('.hr-slides', $heroRotator)
-        , $slidesItems = $('.hr-slides-item', $slides)
+        , $slides = $heroRotator.children()
         , $slide
-        , $pagination = $('.hr-pagination', $heroRotator)
-        , $paginationItems = $('.hr-pagination-item', $pagination)
-        , $arrows = $('.hr-arrows', $heroRotator)
-        , zIndex = 1
-        , options = {
-            transitionDuration: $heroRotator.data('hr-transition-duration')
-          , reverseDelays: $heroRotator.data('hr-reverse-delays')
-          , continuous: $heroRotator.data('hr-continuous') };
+        , zIndex = 1;
 
       $heroRotator.on('initialiseHero', function () {
+
+        $heroRotator.css(
+          { outline: 0
+          , position: 'relative'
+          , zoom: 1
+          , height: options.height
+          }
+        );
+
+        $heroRotator.attr('tabindex', 1);
+
+        $slides.css(
+          { position: 'absolute'
+          , height: options.height
+          }
+        );
+
         // Reverse the stacking order of slide items to show the first on top
-        $slidesItems.css(
+        $slides.css(
           { zIndex: function (zIndex) {
               // Calculate the zIndex for this slide item
-              return $slidesItems.length - zIndex;
+              return $slides.length - zIndex;
             } }
         );
 
         // Find all elements that have transitions
-        $slidesItems.find('.hr-transition').each(function () {
-          var $this = $(this);
+        $slides.find('[data-hr-transform]').each(function () {
+          var $this = $(this)
+            , options =
+              { transform: $this.data('hr-transform') || ""
+              , duration: $this.data('hr-duration') || 300
+              , delay: $this.data('hr-delay') || 0
+              };
 
-          // Sanetize the x and y values
-          $this.data('hr-translate3d',
-            [ parseInt($this.data('hr-x'), 10) || 0
-            , parseInt($this.data('hr-y'), 10) || 0
-            , 0 ]
-          );
+          $this.data('hr-options', options);
+
+          // Apply the transform to all slides by default so we get in the
+          // effect of transitions on slide entrance.
+          // Force recalculate style to force the transition out styles to
+          // apply immediately, before transition is applied.
+          $this.trigger('hrTransitionOut').width();
 
           // Apply the transition
-          $this.css({ transition: 'all ' + convertToMilliseconds($this.data('hr-duration')) + ' ease ' + convertToMilliseconds($this.data('hr-delay')) });
-
-          // Apply the transform to all slides by default so we get in the effect
-          // of transitions on slide entrance.
-          $this.trigger('hrTransitionOut');
+          $this.css({ transition: 'all ' + convertToMilliseconds(options.duration) + ' ease ' + convertToMilliseconds(options.delay) });
         });
 
         $heroRotator.trigger('changeSlide');
@@ -171,7 +196,7 @@
         var $newSlide;
 
         if (options.continuous) {
-          $newSlide = ($slide.next().length) ? $slide.next() : $slidesItems.first();
+          $newSlide = ($slide.next().length) ? $slide.next() : $slides.first();
         } else {
           $newSlide = $slide.next();
         }
@@ -185,22 +210,13 @@
         var $newSlide;
 
         if (options.continuous) {
-          $newSlide = ($slide.prev().length) ? $slide.prev() : $slidesItems.last();
+          $newSlide = ($slide.prev().length) ? $slide.prev() : $slides.last();
         } else {
           $newSlide = $slide.prev();
         }
 
         if ($newSlide.length) {
           $newSlide.trigger('goToSlide');
-        }
-      });
-
-      $slidesItems.on('goToSlide', function () {
-        var slideIndex = $(this).index();
-
-        // If there is another slide item to the right…
-        if ($slidesItems[slideIndex]) {
-          $heroRotator.trigger('changeSlide', [slideIndex]);
         }
       });
 
@@ -214,10 +230,7 @@
         slideIndex = (slideIndex !== undefined) ? slideIndex : 0;
 
         // Find this slide element
-        $slide = $slidesItems.eq(slideIndex);
-
-        // Clean up pagination
-        $paginationItems.removeClass('hr-active');
+        $slide = $slides.eq(slideIndex);
 
         if ($prevSlide) {
           // If there is a previous slide, make sure it isn't the same as the
@@ -230,16 +243,9 @@
             reverseDelays($prevSlide);
           }
 
-          $prevSlide.find('.hr-transition').each(function () {
+          $prevSlide.find('[data-hr-transform]').each(function () {
             $(this).trigger('hrTransitionOut');
           });
-
-          // IN
-
-          // Update the corresponding pagination item
-          $paginationItems
-            .eq(slideIndex)
-              .addClass('hr-active');
 
           // We hide the slide, increase its zIndex to make it appear on top
           // of other slides, and then fade it in. In previous versions we
@@ -248,7 +254,7 @@
           // the background.
           $slide
             .css({ display: 'none' })
-            .css('zIndex', $slidesItems.length + zIndex)
+            .css('zIndex', $slides.length + zIndex)
             .fadeIn(options.transitionDuration);
 
           // The zIndex variable is increased every time to ensure the next
@@ -261,50 +267,43 @@
           }
         }
 
-        $slide.find('.hr-transition').each(function () {
+        $slide.find('[data-hr-transform]').each(function () {
           $(this).trigger('hrTransitionIn');
         });
       });
 
-      $slidesItems.on('hrTransitionOut', '.hr-transition', function () {
-        var $this = $(this)
-          , translate3d = $this.data('hr-translate3d');
+      $slides.on('goToSlide', function () {
+        var slideIndex = $(this).index();
 
-        $this.css(
-          { transform: 'translate3d(' + translate3d.join('px, ') + ')'
-          , opacity: 0 }
-        );
-      });
-
-      $slidesItems.on('hrTransitionIn', '.hr-transition', function () {
-        $(this).css(
-          { transform: ''
-          , opacity: '' }
-        );
-      });
-
-      $arrows.on('click', '.hr-arrows-item', function () {
-        switch ($(this).data('hr-direction')) {
-
-          case 'previous':
-            $heroRotator.trigger('goToPrevSlide');
-            break;
-
-          case 'next':
-            $heroRotator.trigger('goToNextSlide');
-            break;
-
+        // If there is another slide item to the right…
+        if ($slides[slideIndex]) {
+          $heroRotator.trigger('changeSlide', [slideIndex]);
         }
       });
 
-      $pagination.on('click', '.hr-pagination-item', function () {
-        $heroRotator.trigger('changeSlide', $(this).index());
+      $slides.on('hrTransitionOut', '[data-hr-transform]', function () {
+        var $this = $(this)
+          , options = $this.data('hr-options');
+
+        $this.css(
+          { transform: options.transform
+          , opacity: 0
+          }
+        );
+      });
+
+      $slides.on('hrTransitionIn', '[data-hr-transform]', function () {
+        $(this).css(
+          { transform: ''
+          , opacity: ''
+          }
+        );
       });
 
       $heroRotator.trigger('initialiseHero');
 
     });
 
-  });
+  };
 
 }(jQuery));

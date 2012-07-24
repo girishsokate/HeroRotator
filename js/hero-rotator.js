@@ -1,5 +1,6 @@
 // Hero Rotator
 // Author: Oliver Joseph Ash
+// Source URL and license information: https://github.com/OliverJAsh/HeroRotator
 ;(function ($) {
 
   // ----- CSS Hooks ----- //

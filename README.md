@@ -14,11 +14,11 @@ Grab a copy of the source. You will need a copy of `hero-rotator.css` and `hero-
 
 The Hero Rotator container looks like this:
 
-    <div class="hr" data-hr-transition-duration="2000" data-hr-reverse-delays="true" data-hr-continuous="true">
+    <div data-hr data-hr-transition-duration="2000" data-hr-reverse-delays="true" data-hr-continuous="true">
       …
     </div>
 
-The `hr` class is required. This is the element that should contain everything related to the Hero Rotator — slides, pagination and arrow buttons (see example markup).
+The `hr` data attribute is required to initialise the plugin. This is the element that should contain everything related to the Hero Rotator — slides, pagination and arrow buttons (see example markup).
 
 ### Options
 Specify options using data attributes onto the `hr` module (like above).

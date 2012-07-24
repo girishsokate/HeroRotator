@@ -69,7 +69,7 @@
 
   $(document).ready(function () {
 
-    var $heroRotators = $('.hr');
+    var $heroRotators = $('[data-hr]');
 
     function reverseDelays($el) {
       var $this = $(this)

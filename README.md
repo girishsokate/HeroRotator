@@ -26,8 +26,6 @@ The plugin follows a simple markup pattern: any children elements are treated as
 
 Above is the initial required structure – a series of elements wrapped in a container. This can be any combination of elements that has the same structure.
 
-This is the element that should contain everything related to the Hero Rotator — slides, pagination and arrow buttons (see example markup).
-
 Once you have your markup, initialise the plugin:
 
     $('.hr').heroRotator();
@@ -65,14 +63,13 @@ Inside each slide you have the option of transitioning content elements individu
       </section>
     </div>
 
-### Pagination and Arrow Buttons
 ### API
 
 If you want to include things like pagination and previous/next navigation buttons, you will need to write some JavaScript to talk to the Hero Rotator API. The API uses custom jQuery events:
 
-* .trigger('changeSlide', [index])
-* .trigger('goToPrevSlide')
-* .trigger('goToNextSlide')
+* `.trigger('changeSlide', [index])`
+* `.trigger('goToPrevSlide')`
+* `.trigger('goToNextSlide')`
 
 In the example `index.html` file provided, there are live examples of pagination and previous/next navigation buttons which make use of this API.
 
@@ -86,6 +83,8 @@ Tested and working in all browsers. Element transitions are powered by CSS3, so 
 
 ## Let's Make It Better
 
-I would love to hear more about how to improve Hero Rotator. Play with it fork away. If you have any questions, contact me on [Twitter](http://twitter.com/OliverJAsh).
+I would love to hear more about how to improve Hero Rotator. Play with it and fork away. If you have any questions, contact me on [Twitter](http://twitter.com/OliverJAsh).
+
+## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Hero Rotator</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://twitter.com/OliverJAsh" property="cc:attributionName" rel="cc:attributionURL">Oliver Joseph Ash</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/OliverJAsh/HeroRotator" rel="dct:source">https://github.com/OliverJAsh/HeroRotator</a>.

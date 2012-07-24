@@ -33,9 +33,11 @@ Once you have your markup, initialise the plugin:
 ## Options
 Hero Rotator can take an optional paramater - an object of key/value options:
 
-* `transitionDuration` - The duration of the fading transition between slides.
-* `reverseDelays` - Boolean for whether or not delays should be reversed when slides are transitioning out.
-* `continous` - Boolean for whether or not rotation of slides should be continuous.
+* **`height`** String (pixels) - The height of the rotator.
+* **`transitionDuration`** Integer - The duration of the fading transition between slides.
+* **`reverseDelays`** Boolean - Specifies whether or not delays should be reversed when slides are transitioning out.
+* **`continous`** Boolean - Specifies whether or not rotation of slides should be continuous.
+* **`callback`** Function - Runs at the end of any slide change (effective for updating position indicators/counters).
 
 ### Example
 

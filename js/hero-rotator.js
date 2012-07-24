@@ -271,6 +271,10 @@
         $slide.find('[data-hr-transform]').each(function () {
           $(this).trigger('hrTransitionIn');
         });
+
+        if (options.callback) {
+          options.callback();
+        }
       });
 
       $slides.on('goToSlide', function () {

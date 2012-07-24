@@ -46,6 +46,9 @@ Hero Rotator can take an optional paramater - an object of key/value options:
       , transitionDuration: 2000
       , reverseDelays: true
       , continous: true
+      , callback: function () {
+          console.log('Done!');
+        }
       }
     );
 

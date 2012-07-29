@@ -12,23 +12,27 @@ The idea of Hero Rotator is to provide you with everything you need to build you
 
 The plugin follows a simple markup pattern: any children elements are treated as slides. For example:
 
-    <div class="hr">
-      <section class="example-1">
-        …
-      </section>
-      <section class="example-2">
-        …
-      </section>
-      <section class="example-3">
-        …
-      </section>
-    </div>
+``` html
+<div class="hr">
+  <section class="example-1">
+    …
+  </section>
+  <section class="example-2">
+    …
+  </section>
+  <section class="example-3">
+    …
+  </section>
+</div>
+```
 
 Above is the initial required structure – a series of elements wrapped in a container. This can be any combination of elements that has the same structure.
 
 Once you have your markup, initialise the plugin:
 
-    $('.hr').heroRotator();
+``` js
+$('.hr').heroRotator();
+```
 
 ## Options
 Hero Rotator can take an optional paramater - an object of key/value options:
@@ -41,16 +45,18 @@ Hero Rotator can take an optional paramater - an object of key/value options:
 
 ### Example
 
-    $('.hr').heroRotator(
-      { height: '450px'
-      , transitionDuration: 2000
-      , reverseDelays: true
-      , continous: true
-      , callback: function () {
-          console.log('Done!');
-        }
-      }
-    );
+``` js
+$('.hr').heroRotator(
+  { height: '450px'
+  , transitionDuration: 2000
+  , reverseDelays: true
+  , continous: true
+  , callback: function () {
+      console.log('Done!');
+    }
+  }
+);
+```
 
 ### Slide Options
 
@@ -62,11 +68,13 @@ Inside each slide you have the option of transitioning content elements individu
 
 #### Example
 
-    <div class="hr">
-      <section class="example-1">
-        <img src="images/imac.png" data-hr-transform="translate3d(75px, 0, 0)" data-hr-duration="3000" data-hr-delay="200" class="slide-image-1">
-      </section>
-    </div>
+``` html
+<div class="hr">
+  <section class="example-1">
+    <img src="images/imac.png" data-hr-transform="translate3d(75px, 0, 0)" data-hr-duration="3000" data-hr-delay="200" class="slide-image-1">
+  </section>
+</div>
+```
 
 ### API
 

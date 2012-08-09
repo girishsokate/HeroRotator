@@ -72,7 +72,9 @@
 
   function reverseDelays($el) {
     var $this = $(this)
-      , $delayedElements = $el.find('[data-hr-transform][data-hr-delay]')
+      , $delayedElements = $el.find('[data-hr-transform]').filter(function () {
+          return $(this).css('transitionDelay') !== '0s';
+        })
       , delays = []
       , minPlusMax;
 
@@ -81,7 +83,7 @@
     // Find each delayed elements and reverse the number of its delay class
     $delayedElements.each(function () {
       var $this = $(this)
-        , options = $this.data('hr-options');
+        , options = $this.data('hr-transition-options');
 
       delays.push(options.delay);
     });
@@ -96,7 +98,9 @@
   }
 
   function resetDelays($el) {
-    $el.find('[data-hr-transform][data-hr-delay]').each(function () {
+    $el.find('[data-hr-transform]').filter(function () {
+      return $(this).css('transitionDelay') !== '0s';
+    }).each(function () {
       var $this = $(this)
         , options = $this.data('hr-options');
 
@@ -152,13 +156,15 @@
         // Find all elements that have transitions
         $slides.find('[data-hr-transform]').each(function () {
           var $this = $(this)
-            , options =
+            , transitionOptions =
               { transform: $this.data('hr-transform') || ""
               , duration: $this.data('hr-duration') || 300
-              , delay: $this.data('hr-delay') || 0
+              // Default delay of 1ms when reverseDelays is set to force
+              // the delay of elements without delays on transition out.
+              , delay: $this.data('hr-delay') || (options.reverseDelays ? 1 : 0)
               };
 
-          $this.data('hr-options', options);
+          $this.data('hr-transition-options', transitionOptions);
 
           // Apply the transform to all slides by default so we get in the
           // effect of transitions on slide entrance.
@@ -167,7 +173,7 @@
           $this.trigger('hrTransitionOut').width();
 
           // Apply the transition
-          $this.css({ transition: 'all ' + convertToMilliseconds(options.duration) + ' ease ' + convertToMilliseconds(options.delay) });
+          $this.css({ transition: 'all ' + convertToMilliseconds(transitionOptions.duration) + ' ease ' + convertToMilliseconds(transitionOptions.delay) });
         });
 
         $heroRotator.trigger('changeSlide');
@@ -288,7 +294,7 @@
 
       $slides.on('hrTransitionOut', '[data-hr-transform]', function () {
         var $this = $(this)
-          , options = $this.data('hr-options');
+          , options = $this.data('hr-transition-options');
 
         $this.css(
           { transform: options.transform

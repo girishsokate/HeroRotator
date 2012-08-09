@@ -51,8 +51,8 @@ $('.hr').heroRotator(
   , transitionDuration: 2000
   , reverseDelays: true
   , continous: true
-  , callback: function () {
-      console.log('Done!');
+  , callback: function ($slide) {
+      console.log($slide, 'Done!');
     }
   }
 );

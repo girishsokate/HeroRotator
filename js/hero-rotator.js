@@ -280,7 +280,7 @@
         });
 
         if (options.callback) {
-          options.callback();
+          options.callback($slide);
         }
       });
 

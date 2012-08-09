@@ -102,7 +102,7 @@
       return $(this).css('transitionDelay') !== '0s';
     }).each(function () {
       var $this = $(this)
-        , options = $this.data('hr-options');
+        , options = $this.data('hr-transition-options');
 
       $this.css({ transitionDelay: convertToMilliseconds(options.delay) });
     });
@@ -141,6 +141,7 @@
 
         $slides.css(
           { position: 'absolute'
+          , width: '100%'
           , height: options.height
           }
         );

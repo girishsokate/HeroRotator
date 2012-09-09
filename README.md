@@ -37,7 +37,7 @@ $('.hr').heroRotator();
 ## Options
 Hero Rotator can take an optional paramater - an object of key/value options:
 
-* **`height`** String (pixels) - The height of the rotator.
+* **`height`** String (pixels) – The height of the rotator.
 * **`transitionDuration`** Integer - The duration of the fading transition between slides.
 * **`reverseDelays`** Boolean - Specifies whether or not delays should be reversed when slides are transitioning out.
 * **`continous`** Boolean - Specifies whether or not rotation of slides should be continuous.

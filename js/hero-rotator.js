@@ -115,6 +115,8 @@
       , transitionDuration: 2000
       , reverseDelays: true
       , continous: true
+      , timer: true
+      , timerDelay: '5900'
       };
 
     // Merge defaults and options, without modifying defaults
@@ -199,6 +201,13 @@
 
         }
       });
+
+      // Set Timer
+      if(options.timer === true) {
+        setInterval(function() {
+          $heroRotator.trigger('goToNextSlide');
+        }, options.timerDelay);
+      }
 
       $heroRotator.on('goToNextSlide', function () {
         var $newSlide;
